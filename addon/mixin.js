@@ -1,7 +1,7 @@
 import Mixin from '@ember/object/mixin';
 import { computed, get, setProperties } from '@ember/object';
 import { alias, readOnly } from '@ember/object/computed';
-import { isArray } from '@ember/array';
+import { isArray, A as EmberArray } from '@ember/array';
 
 export default Mixin.create({
   _content: null,
@@ -33,7 +33,7 @@ export default Mixin.create({
     setProperties(this, {
       _content: content,
       _isBuffered: true,
-      buffer: isArray(content) ? content.toArray() : []
+      buffer: isArray(content) ? EmberArray(content).toArray() : EmberArray([])
     });
   },
 

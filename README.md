@@ -1,26 +1,61 @@
-# ember-buffered-array-proxy
+# ember-buffered-array-proxy [![Build Status](https://travis-ci.org/offirgolan/ember-buffered-array-proxy.svg?branch=master)](https://travis-ci.org/offirgolan/ember-buffered-array-proxy)
 
-This README outlines the details of collaborating on this Ember addon.
+An Ember Array Proxy (and mixin) the enables change buffering. Ever need to "hold back" array changes before they propagate? If so this may be the project for you.
 
-## Installation
+This project follows similar API structure as [ember-buffered-proxy](https://github.com/yapplabs/ember-buffered-proxy).
 
-* `git clone <repository-url>` this repository
-* `cd ember-buffered-array-proxy`
-* `npm install`
+## Usage
 
-## Running
+```sh
+ember install ember-buffered-array-proxy
+```
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+```js
+import BufferedArrayProxy from 'ember-buffered-array-proxy/proxy';
 
-## Running Tests
+const content = [ 'A' ];
+const buffer = BufferedArrayProxy.create({ content });
 
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+buffer.get('firstObject'); // => 'A'
+buffer.addObject('B');
 
-## Building
+buffer.objectAt(1); // => 'B'
+buffer.toArray(); // => ['A', 'B']
 
-* `ember build`
+buffer.get('hasChanges'); // => true
+buffer.get('changes'); // => (get an object describing the changes) -- { added: ['B'], removed: [] }
 
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+buffer.applyBufferedChanges();
+
+buffer.toArray(); // => ['A', 'B']
+content.toArray(); // => ['A', 'B']
+buffer.get('hasChanges'); // => false
+
+buffer.removeObject('A');
+buffer.get('changes'); // => { added: [], removed: ['A'] }
+buffer.hasChanged(); // => true
+
+buffer.discardBufferedChanges();
+
+buffer.toArray(); // => ['A', 'B']
+content.toArray(); // => ['A', 'B']
+buffer.hasChanged(); // => false
+```
+
+You can also use these shorter method names
+
+```js
+buffer.discardChanges(); // equivalent to buffer.discardBufferedChanges()
+buffer.applyChanges();   // equivalent to buffer.applyBufferedChanges()
+```
+
+Or you can grab the mixin directly
+
+```js
+import BufferedArrayMixin from 'ember-buffered-array-proxy/mixin';
+
+const content = ['A']
+const buffer = ArrayProxy.extend(BufferedArrayMixin).create({ content });
+
+// same as above
+```
