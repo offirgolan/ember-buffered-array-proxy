@@ -1,4 +1,4 @@
-# ember-buffered-array-proxy [![Build Status](https://travis-ci.org/offirgolan/ember-buffered-array-proxy.svg?branch=master)](https://travis-ci.org/offirgolan/ember-buffered-array-proxy)
+# ember-buffered-array-proxy [![Build Status](https://travis-ci.org/offirgolan/ember-buffered-array-proxy.svg?branch=master)](https://travis-ci.org/offirgolan/ember-buffered-array-proxy) [![npm version](https://badge.fury.io/js/ember-buffered-array-proxy.svg)](http://badge.fury.io/js/ember-buffered-array-proxy)
 
 An Ember Array Proxy (and mixin) the enables change buffering. Ever need to "hold back" array changes before they propagate? If so this may be the project for you.
 
