@@ -1,17 +1,19 @@
 {
   "name": "ember-buffered-array-proxy",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "An Ember Array Proxy the enables change buffering",
   "keywords": [
     "ember-addon"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Offir Golan <offirgolan@gmail.com>",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/offirgolan/ember-buffered-array-proxy",
+  "bugs": "https://github.com/offirgolan/ember-buffered-array-proxy/issues",
+  "homepage": "https://github.com/offirgolan/ember-buffered-array-proxy",
   "scripts": {
     "build": "ember build",
     "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests",
